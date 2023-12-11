@@ -1,0 +1,81 @@
+<?php
+    session_start();
+    if(!$_SESSION['login']) {
+        header("Location:login.php");
+    }
+        
+    
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Foodie's Zone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="">
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo"><i class="fas fa-utensils"></i></a>
+            <h1>Foodie's Zone</h1>
+            <nav class="navbar">
+                <a href="#veg">Veg</a>
+                <a href="#Non-veg" >Non-veg</a>
+                <a href="#Beverges">Beverges</a>
+                <a href="#Sweets" >Sweets</a>
+                <a href="#Snacks">Snacks</a>
+                <a href="payment.html">Payment</a>
+            </nav>
+
+            <div class="shopping">
+                <img src="images/cart.png">
+                <span class="quantity">0</span>
+            </div>
+
+        </header>
+        <div style="margin-top: 10rem; font-size: 1.5rem; text-align: center; color:var(--red) ">
+            <h1 id="veg" class="heading"><span>veg</span></h1>
+            <div class="list list1" >
+            </div>
+            <h1 id="Non-veg" class="heading" style="margin: 50px;"><span>Non-veg</span></h1>
+            <div class="list list2" >
+            </div>
+            <div>
+                <h1 id="Beverges" class="heading" style="margin: 50px;"><span>Beverges</span></h1>
+                <div class="list list3" >
+                </div>
+            </div>
+            <div>
+                <h1 id="Sweets" class="heading" style="margin: 50px;"><span>Sweets</span></h1>
+                <div class="list list4" >
+                </div>
+            </div>
+            <div>
+                <h1 id="Snacks" class="heading" style="margin: 50px;"><span>Snacks</span></h1>
+                <div class="list list5" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h1>Cart</h1>
+        <ul class="listCard">
+        </ul>
+        <div class="checkOut">
+            <div class="total">Checkout</div>
+            <div class="closeShopping">Close</div>
+        </div>
+    </div>
+
+    <script src="script1.js"></script>
+
+</body>
+
+</html>

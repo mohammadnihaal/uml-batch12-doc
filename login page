@@ -1,0 +1,139 @@
+<?php
+    session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <!--connect css-->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Foodie's Zone</title>
+    </head>
+
+    <body id="login">
+
+        <div class="wrapper">
+            <span class="icon-close">
+               <ion-icon name="close-outline"></ion-icon>
+            </span>
+            <div class="form-box login">
+                <h2>login</h2>
+                <form action="#" method="post">
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="tel" id="lognum" name="lognum" required>
+                        <label>phone number</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" id="logpwd" name="logpwd" required>
+                        <label>password</label>
+                    </div>
+                    <div class="remember-forget">
+                            <label>
+                                <input type="checkbox">
+                                remember me </label>
+                                <a href="#">Forget Password?</a>
+                    </div>
+                        <button type="submit" class="btn1"  id="login1" name="login1">login</button>
+                    <div class="login-register">
+                        <p>Don't have an account?  <a href="#" class="register-link">Register</a></p> 
+                    </div>
+                </form>
+            </div>
+            <div class="form-box Register">
+                <h2>Registration</h2>
+                <form action="#" method="post">
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" id="regphone" name="regphone" required>
+                        <label>phone number</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" id="regmail" name="regmail" required>
+                        <label>email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" id="regpwd" name="regpwd" required>
+                        <label>password</label>
+                    </div>
+                        <div class="remember-forget">
+                            <label>
+                                <input type="checkbox">
+                                Agree to the terms & conditions </label>
+                        </div>
+                        <button type="submit" class="btn1" id="Register" name="Register">Register</button>
+                        <div class="login-register">
+                        <p>Already have an account?  <a href="#" class="login-link">login</a></p>
+                        </div>
+                </form>
+            </div>
+        </div>
+
+
+        
+
+        <script src="script2.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    </body>
+</html>
+
+
+<?php
+
+    if(isset($_POST["Register"])){
+        $phnreg=$_POST['regphone'];
+        $mailreg=$_POST['regmail'];
+        $pwdreg=$_POST['regpwd'];
+
+        $conn=mysqli_connect("localhost","root","","foodiezone");
+        $query="insert into login values('$phnreg','$mailreg','$pwdreg');";
+        $result=mysqli_query($conn,$query);
+
+        if($result){
+            
+            echo "<script>
+                alert('Registration successful');
+            </script>";
+
+        }
+        else{
+            echo "<script>
+                alert('not successful');
+            </script>";
+        }
+        
+        mysqli_close($conn);
+
+    }
+
+    if(isset($_POST['login1'])){
+        $phno=$_POST['lognum'];
+        $pwd=$_POST['logpwd'];
+
+        $conn=mysqli_connect("localhost","root","","foodiezone");
+        $query="select * from login where phonenumber=$phno and password=$pwd;";
+        $result=mysqli_query($conn,$query);
+        if(mysqli_num_rows($result)>0){
+            $_SESSION['login']=true;    
+            $_SESSION['phno']=$phno;
+
+            echo "<script> alert('login successful');</script>";
+            header("Location:index.php");
+        }
+        else{
+            $_SESSION['login']=false;
+            echo "<script> alert('invalid credentials,if you are not having account register');</script>";
+            
+        }
+
+        mysqli_close($conn);
+
+    }
+?>
